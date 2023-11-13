@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/EeeasyCode/haru-hanjul/issues"
   },
-  "homepage": "https://github.com/EeeasyCode/haru-hanjul#readme"
+  "homepage": "https://github.com/EeeasyCode/haru-hanjul#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
