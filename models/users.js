@@ -10,7 +10,7 @@ module.exports = class Users extends Sequelize.Model {
             },
             password: {
                 field: "password",
-                type: Sequelize.STRING(30),
+                type: Sequelize.STRING(255),
                 allowNull: false
             },
             created_at: {
