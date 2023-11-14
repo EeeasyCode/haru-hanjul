@@ -14,7 +14,7 @@ class UserService {
 
     const createUserData = await this.userRepository.createUser(username, password);
     console.log(createUserData);
-    
+
     return "success create user";
   }
 }
