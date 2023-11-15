@@ -5,11 +5,15 @@ class UsersController {
 
 
   createUser = async (req, res, next) => {
-    const { username, password } = req.body;
-    const createUserData = await this.usersService.createUser(username, password);
-
-    res.status(201).json({ data: createUserData });
+    const { username, email, password } = req.body;
+    const createCheck = await this.usersService.createUser(username, email, password);
+    if (!createCheck) {
+      return res.redirect('/auth/entry?error=exist');
+    }
+    return res.redirect('/auth/entry');
   }
 }
 
 module.exports = UsersController;
+
+

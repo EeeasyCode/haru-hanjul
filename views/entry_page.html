@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>index</title>
+  <link rel="stylesheet" href="/css/entry_page.css">
+</head>
+<body>
+  <section class="wrapper">
+    <div class="form signup">
+      <header>Signup</header>
+      <form action="/users/create" method="post">
+        <input type="text" placeholder="Full name" name="username" required />
+        <input type="email" placeholder="Email address" name="email" required />
+        <input type="password" placeholder="Password" name="password" required />
+        <div class="checkbox">
+          <input type="checkbox" id="signupCheck"/>
+          <label for="">I accept all terms</label>
+        </div>
+        <input type="submit" value="Signup">
+      </form>
+    </div>
+
+    <div class="form login">
+      <header>Login</header>
+      <form action="/auth/login" method="post">
+        <input type="email" placeholder="Email address" name="email" required />
+        <input type="password" placeholder="Password" name="password" required />
+        <a href="#">Forgot password?</a>
+        <input type="submit" value="Login">
+      </form>
+    </div>
+
+    <script>
+      const wrapper = document.querySelector(".wrapper"),
+        signupHeader = document.querySelector(".signup header"),
+        loginHeader = document.querySelector(".login header");
+
+        loginHeader.addEventListener("click", () => {
+          wrapper.classList.add("active");
+        })
+
+        signupHeader.addEventListener("click", () => {
+          wrapper.classList.remove("active");
+        })
+          
+      window.onload = () => {
+        console.log(new URL(location.href).searchParams.get('error'))
+        if (new URL(location.href).searchParams.get('error')==='exist') {
+          alert('이미 존재하는 이메일입니다.');
+        }
+        if (new URL(location.href).searchParams.get('error')==='check') {
+          alert('계정 정보를 다시 확인해주세요.');
+        }
+      };
+    </script>
+  </section>
+</body>
+</html>
