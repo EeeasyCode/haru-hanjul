@@ -8,6 +8,10 @@ module.exports = class Users extends Sequelize.Model {
                 allowNull: false,
                 unique: true,
             },
+            email: {
+                type: Sequelize.STRING(30),
+                allowNull: false,
+            },
             password: {
                 field: "password",
                 type: Sequelize.STRING(255),
@@ -29,6 +33,6 @@ module.exports = class Users extends Sequelize.Model {
         });
     }
     static associate(db) {
-        db.Users.hasMany(db.Comment, { foreignKey: "commenter", sourceKey: "id" })
+        db.Users.hasMany(db.Posts, { foreignKey: "publisher", sourceKey: "id" })
     }
 };

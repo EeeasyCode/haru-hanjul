@@ -4,17 +4,17 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>index</title>
   <link rel="stylesheet" href="css/first_page.css">
 </head>
 <body>
   <section class="wrapper">
     <div class="form signup">
       <header>Signup</header>
-      <form action="#">
-        <input type="text" placeholder="Full name" required />
-        <input type="text" placeholder="Email address" required />
-        <input type="password" placeholder="Password" required />
+      <form action="/users/create" method="post">
+        <input type="text" placeholder="Full name" name="username" required />
+        <input type="email" placeholder="Email address" name="email" required />
+        <input type="password" placeholder="Password" name="password" required />
         <div class="checkbox">
           <input type="checkbox" id="signupCheck"/>
           <label for="">I accept all terms</label>
@@ -45,7 +45,12 @@
         signupHeader.addEventListener("click", () => {
           wrapper.classList.remove("active");
         })
-
+          
+      window.onload = () => {
+        if (new URL(location.href).searchParams.get('error')) {
+          alert('이미 존재하는 이메일입니다.');
+        }
+      };
     </script>
   </section>
 </body>

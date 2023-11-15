@@ -4,17 +4,16 @@ const bcrypt = require("bcrypt");
 class UserService {
   userRepository = new UserRepository();
 
-  createUser = async (username, password) => {
-    const checkUser = await this.userRepository.findUser({ username });
+  createUser = async (username, email, password) => {
+    const checkUser = await this.userRepository.findUser({ email });
     
     if (checkUser) {
-      return "이미 존재하는 계정입니다."
+      return false
     }
 
     const hashPassword = await bcrypt.hash(password, 10);
-    await this.userRepository.createUser(username, hashPassword);
-
-    return "success create user";
+    await this.userRepository.createUser(username, email, hashPassword);
+    return true
   }
 }
 
