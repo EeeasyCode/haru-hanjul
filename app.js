@@ -5,7 +5,8 @@ const path = require("path");
 const nunjucks = require("nunjucks");
 
 const { sequelize } = require("./models");
-const userRoute = require("./routes/users.routes")
+const userRoute = require("./routes/users.routes");
+const authRoute = require("./routes/auth.routes")
 const app = express();
 
 dotenv.config();
@@ -32,6 +33,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/users", userRoute);
+app.use("/auth", authRoute);
 
 app.listen(app.get("port"), () => {
     console.log(`${app.get("port")} port is running ..`);

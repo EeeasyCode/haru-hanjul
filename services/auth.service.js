@@ -1,9 +1,7 @@
-const AuthRepository = require('../repository/auth.repository')
-const UserRepository = require("../repository/users.repository")
+const UserRepository = require("../repository/users.repository");
 const bcrypt = require("bcrypt");
 
 class AuthService {
-  authRepository = new AuthRepository();
   userRepository = new UserRepository();
 
   authLogin = async (username, password) => {
