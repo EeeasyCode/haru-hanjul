@@ -5,6 +5,7 @@ class UserRepository {
     const findUserData = await Users.findOne({ where: username });
     return findUserData;
   }
+
   createUser = async (username, password) => {
     
     const createUserData = await Users.create({ username, password });
