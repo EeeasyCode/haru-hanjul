@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>index</title>
-  <link rel="stylesheet" href="css/first_page.css">
+  <link rel="stylesheet" href="/css/entry_page.css">
 </head>
 <body>
   <section class="wrapper">
@@ -25,9 +25,9 @@
 
     <div class="form login">
       <header>Login</header>
-      <form action="#">
-        <input type="text" placeholder="Email address" required />
-        <input type="password" placeholder="Password" required />
+      <form action="/auth/login" method="post">
+        <input type="email" placeholder="Email address" name="email" required />
+        <input type="password" placeholder="Password" name="password" required />
         <a href="#">Forgot password?</a>
         <input type="submit" value="Login">
       </form>
@@ -47,8 +47,12 @@
         })
           
       window.onload = () => {
-        if (new URL(location.href).searchParams.get('error')) {
+        console.log(new URL(location.href).searchParams.get('error'))
+        if (new URL(location.href).searchParams.get('error')==='exist') {
           alert('이미 존재하는 이메일입니다.');
+        }
+        if (new URL(location.href).searchParams.get('error')==='check') {
+          alert('계정 정보를 다시 확인해주세요.');
         }
       };
     </script>

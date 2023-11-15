@@ -5,11 +5,14 @@ class AuthController {
 
 
   authLogin = async (req, res, next) => {
-    const { username, password } = req.body;
-    const authLoginData = await this.authService.authLogin(username, password);
+    const { email, password } = req.body;
+    const authLoginData = await this.authService.authLogin(email, password);
 
+    if (!authLoginData) {
+      return res.redirect("/auth/entry?error=check");
+    }
     res.cookie('user', authLoginData);
-    res.status(201).json({
+    return res.status(201).json({
       result: 'ok',
       authLoginData
     });

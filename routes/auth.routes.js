@@ -8,7 +8,7 @@ const authController = new AuthController();
 
 router.post('/login', authController.authLogin);
 router.get('/test', verifyToken, authController.test);
-router.get("/", (req, res) => {
-    res.render("first_page");
+router.get("/entry", (req, res) => {
+    res.render("entry_page");
 })
 module.exports = router;

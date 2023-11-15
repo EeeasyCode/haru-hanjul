@@ -9,26 +9,26 @@ dotenv.config();
 class AuthService {
   userRepository = new UserRepository();
 
-  authLogin = async (username, password) => {
-    const checkUser = await this.userRepository.findUser({ username });
+  authLogin = async (email, password) => {
+    const checkUser = await this.userRepository.findUser({ email });
     const hashPassword = await bcrypt.compare(password, checkUser.password);
 
     if (!checkUser || hashPassword === false) {
-        return "check id or pw"
+        return false
     }
     
-    const authToken = this.createToken(username);
+    const authToken = this.createToken(email);
 
     return authToken
   }
 
-  createToken = async (username) => {
+  createToken = async (email) => {
     const key = process.env.SECRET_KEY;
 
     const token = jwt.sign(
       {
         type: "JWT",
-        username: username,
+        email: email,
       },
       key,
       {
