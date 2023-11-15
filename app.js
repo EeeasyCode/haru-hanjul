@@ -3,6 +3,8 @@ const dotenv = require("dotenv");
 const morgan = require("morgan");
 const path = require("path");
 const nunjucks = require("nunjucks");
+const cookieParser = require('cookie-parser');
+
 
 const { sequelize } = require("./models");
 const userRoute = require("./routes/users.routes");
@@ -27,6 +29,7 @@ sequelize.sync({ force: false})
     });
 
 app.use(morgan("dev"));
+app.use(cookieParser());
 app.use("/", express.static(path.join(__dirname, "public")));
 
 app.use(express.json());

@@ -18,7 +18,7 @@ class AuthService {
     }
     
     const authToken = this.createToken(username);
-    
+
     return authToken
   }
 
@@ -32,7 +32,7 @@ class AuthService {
       },
       key,
       {
-        expiresIn: "1m", // 15분후 만료
+        expiresIn: "1m", 
         issuer: "admin",
       }
     );
