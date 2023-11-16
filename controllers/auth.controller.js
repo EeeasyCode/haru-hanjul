@@ -13,17 +13,6 @@ class AuthController {
     res.cookie('user', authLoginData);
     return res.redirect("/main");
   }
-
-  test = async (req, res, next) => {
-    try {
-        console.log(req);
-        console.log("main");
-        return res.status(200);
-    } catch (err) {
-        console.log("error");
-        return res.status(500);
-    }
-}
 }
 
 

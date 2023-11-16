@@ -9,6 +9,10 @@ router.get("/", (req, res) => {
     res.render("entry_page");
 });
 
-router.get("/main", verifyToken, authController.test);
+router.use('/main', verifyToken);
+router.get("/main", (req, res) => {
+    res.render("main");
+});
 
+ 
 module.exports = router;
