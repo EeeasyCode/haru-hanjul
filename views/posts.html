@@ -19,7 +19,21 @@
         <input type="text" placeholder="Content" name="content" required />
         <input type="submit" value="기록하기">
       </form>
+      <form action="/main" method="get" class="back">
+        <input type="submit" value="돌아가기">
+      </form>
     </div>
+    <script>
+      window.onload = () => {
+        console.log(new URL(location.href).searchParams.get('error'))
+        if (new URL(location.href).searchParams.get('status')==='again') {
+          alert('다시 작성해주세요.');
+        }
+        if (new URL(location.href).searchParams.get('status')==='success') {
+          alert('기록되었어요.');
+        }
+      };
+    </script>
   </section>
 </body>
 </html>
