@@ -9,7 +9,6 @@ class UserService {
     if (checkUser) {
       return false
     }
-
     const hashPassword = await bcrypt.hash(password, 10);
     await this.userRepository.createUser(username, email, hashPassword);
     

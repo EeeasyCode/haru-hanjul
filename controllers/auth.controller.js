@@ -8,26 +8,24 @@ class AuthController {
     const authLoginData = await this.authService.authLogin(email, password);
 
     if (!authLoginData) {
-      return res.redirect("/auth/entry?error=check");
+      return res.redirect("/?error=check");
     }
     res.cookie('user', authLoginData);
-    return res.status(201).json({
-      result: 'ok',
-      authLoginData
-    });
+    return res.redirect("/main");
   }
 
   test = async (req, res, next) => {
     try {
-      return res.status(200).json({
-        code: 200,
-        message: "인증 완료",
-        user: res.locals.userId
-      })
+        console.log(req);
+        console.log("main");
+        return res.status(200);
     } catch (err) {
-      next(err);
+        console.log("error");
+        return res.status(500);
     }
-  }
 }
+}
+
+
 
 module.exports = AuthController;

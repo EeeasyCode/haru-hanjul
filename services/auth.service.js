@@ -11,12 +11,13 @@ class AuthService {
 
   authLogin = async (email, password) => {
     const checkUser = await this.userRepository.findUser({ email });
+    
     const hashPassword = await bcrypt.compare(password, checkUser.password);
 
     if (!checkUser || hashPassword === false) {
         return false
     }
-    
+
     const authToken = this.createToken(email);
 
     return authToken
