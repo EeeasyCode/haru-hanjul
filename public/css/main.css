@@ -25,21 +25,17 @@ body {
     overflow: hidden;
 }
 
-.form header {
+.main header {
     font-size:  30px;
     text-align: center;
     color: #fff;
     font-weight: 600;
 }
 
-.form p {
+.main p {
     font-size: 20px;
     color: #fff;
     font-weight: 600;
-}
-.form.login header {
-    color: #333;
-    opacity: 0.6;
 }
 
 .wrapper form {
@@ -48,7 +44,6 @@ body {
     gap: 20px;
     margin-top: 40px;
 }
-
 form input {
     height: 60px;
     outline: none;
@@ -59,20 +54,6 @@ form input {
     color: #333;
     border-radius: 8px;
 }
-form textarea {
-    height: 60px;
-    outline: none;
-    border: none;
-    padding: 0 15px;
-    font-size: 16px;
-    font-weight: 400;
-    color: #333;
-    border-radius: 8px;
-}
-form .checkbox label {
-    cursor: pointer;
-    color: #fff;
-}
 
 form a {
     color: #333;
@@ -82,16 +63,11 @@ form a {
 form a:hover {
     text-decoration: underline;
 }
+
 form input[type="submit"] {
     margin-top: 15px;
     padding: none;
     font-size: 18px;
     font-weight: 500;
     cursor: pointer;
-}
-
-.form.login input[type="submit"] {
-    background: #4070f4;
-    color: #fff;
-    border: none;
 }

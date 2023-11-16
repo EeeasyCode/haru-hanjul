@@ -6,7 +6,7 @@ class PostService {
 
   createPost = async (date, title, content) => {
 
-    await this.postRepository.createPost(date, title, content);
+    await this.postRepository.createPost(title, content, date);
     
     return true
   }

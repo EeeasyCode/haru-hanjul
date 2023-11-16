@@ -5,14 +5,19 @@ class UserService {
   userRepository = new UserRepository();
 
   createUser = async (username, email, password) => {
-    const checkUser = await this.userRepository.findUser({ email });
-    if (checkUser) {
+    try {
+      const checkUser = await this.userRepository.findUser({ email });
+      console.log(checkUser)
+      if (checkUser) {
+        return true
+      }
+      const hashPassword = await bcrypt.hash(password, 10);
+      await this.userRepository.createUser(username, email, hashPassword);
+      
       return false
+    } catch(err) {
+      console.log(err)
     }
-    const hashPassword = await bcrypt.hash(password, 10);
-    await this.userRepository.createUser(username, email, hashPassword);
-    
-    return true
   }
 }
 

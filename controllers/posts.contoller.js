@@ -6,13 +6,11 @@ class PostsController {
 
   createPost = async (req, res, next) => {
     const { date, title, content } = req.body;
-    const createPost = await this.postsService.createUser(date, title, content);
+    const createPost = await this.postsService.createPost(title, content, date);
     if (!createPost) {
-    //   return res.redirect('?error=exist');
-        return "Error"
+      return res.redirect('?status=again');
     }
-    // return res.redirect('/');
-    return "OK"
+    return res.redirect('?status=success');
   }
 }
 
