@@ -1,14 +1,14 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
-const path = require("path");
 const nunjucks = require("nunjucks");
 const cookieParser = require('cookie-parser');
 
 
 const { sequelize } = require("./models");
 const userRoute = require("./routes/users.routes");
-const authRoute = require("./routes/auth.routes")
+const authRoute = require("./routes/auth.routes");
+const indexRoute = require("./routes/index.routes");
 const app = express();
 
 dotenv.config();
@@ -37,6 +37,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("/users", userRoute);
 app.use("/auth", authRoute);
+app.use('/', indexRoute);
 
 app.use((req, res, next) => {
     const error =  new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
