@@ -10,7 +10,7 @@ class UsersController {
     if (!createCheck) {
       return res.redirect('?error=exist');
     }
-    return res.redirect('main');
+    return res.redirect('/main');
   }
 }
 
