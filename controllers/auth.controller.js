@@ -3,7 +3,6 @@ const AuthService = require('../services/auth.service');
 class AuthController {
   authService = new AuthService(); 
 
-
   authLogin = async (req, res, next) => {
     const { email, password } = req.body;
     const authLoginData = await this.authService.authLogin(email, password);
