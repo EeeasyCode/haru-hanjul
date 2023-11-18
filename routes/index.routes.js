@@ -6,15 +6,13 @@ router.get("/", (req, res) => {
     res.render("entry_page");
 });
 
-router.get("/main", passport.authenticate('jwt', { session: false }), (req, res) => {
-    try {
-        console.log(req)
-        return res.render('main')
-    } catch (error) {
-        console.log(req)
-        return res.redirect("/?error=TokenExpiredError");
-    }
+router.use("/main", passport.authenticate('jwt', { session: false, failureRedirect: '/?error=TokenExpiredError' }));
+
+router.get("/main", (req, res) => {
+
+    return res.render('main')
 });
+
 
  
 module.exports = router;

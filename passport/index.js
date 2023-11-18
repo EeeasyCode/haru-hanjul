@@ -49,6 +49,7 @@ const JWTVerify = async (jwtPayload, done) => {
     done(null, jwtPayload);
   } catch (err) {
     console.log(err);
+    done(err, false);
   }
 };
 

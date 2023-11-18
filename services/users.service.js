@@ -7,7 +7,6 @@ class UserService {
   createUser = async (username, email, password) => {
     try {
       const checkUser = await this.userRepository.findUser({ email });
-      console.log(checkUser)
       if (checkUser) {
         return true
       }
