@@ -1,7 +1,7 @@
 const passport = require('passport');
 const { Strategy: LocalStrategy } = require('passport-local');
+const { ExtractJwt, Strategy: JWTStrategy } = require('passport-jwt');
 const bcrypt = require('bcrypt');
-
 const User = require('../models/users'); 
 const passportConfig = { usernameField: 'email', passwordField: 'password' };
 const passportVerify = async (email, password, done) => {
@@ -14,7 +14,6 @@ const passportVerify = async (email, password, done) => {
     const compareResult = await bcrypt.compare(password, user.password);
 
     if (compareResult) {
-
       done(null, user);
       return;
     }
