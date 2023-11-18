@@ -1,9 +1,10 @@
 const passport = require('passport');
 const { Strategy: LocalStrategy } = require('passport-local');
 const { ExtractJwt, Strategy: JWTStrategy } = require('passport-jwt');
-
+const dotenv = require("dotenv");
 const bcrypt = require('bcrypt');
 const User = require('../models/users'); 
+dotenv.config();
 const passportConfig = { usernameField: 'email', passwordField: 'password' };
 const passportVerify = async (email, password, done) => {
   try {
@@ -45,12 +46,11 @@ const JWTConfig = {
 
 const JWTVerify = async (jwtPayload, done) => {
   try {
-    const { expiration } = jwtPayload
-
-  if (Date.now() > expiration) {
-      done('Unauthorized', false)
-  }
-
+    // const { expiration } = jwtPayload
+  // if (Date.now() > expiration) {
+  //     done('Unauthorized', false)
+  // }
+  console.log(jwtPayload)
   done(null, jwtPayload)
 		// // payload의 id값으로 유저의 데이터 조회
     // const user = await User.findOne({ where: { id: jwtPayload.id } });
