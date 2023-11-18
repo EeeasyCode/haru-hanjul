@@ -7,10 +7,7 @@ verifyToken = async (req, res, token) => {
     const key = process.env.SECRET_KEY;
     
     try {    
-        console.log("hgere")
-        console.log(req.cookies)
         const decoded = jwt.verify(token, key);
-        console.log("de: " + decoded)
         if (decoded) {
             res.locals.userId = decoded.username;
             
