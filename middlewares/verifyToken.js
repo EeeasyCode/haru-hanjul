@@ -8,7 +8,9 @@ verifyToken = async (req, res, next) => {
     
     try {    
         const clientToken = req.cookies.user;
+        console.log(req.cookies)
         const decoded = jwt.verify(clientToken, key);
+        console.log("de: " + decoded)
         if (decoded) {
             res.locals.userId = decoded.username;
             next();
