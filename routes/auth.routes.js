@@ -8,5 +8,5 @@ const authController = new AuthController();
 
 router.post('/login', authController.authLogin);
 
-
+router.post('/signin', authController.signin);
 module.exports = router;
