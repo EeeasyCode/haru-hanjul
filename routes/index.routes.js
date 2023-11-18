@@ -6,7 +6,10 @@ router.get("/", (req, res) => {
     res.render("entry_page");
 });
 
-router.use("/main", passport.authenticate('jwt', { session: false, failureRedirect: '/?error=TokenExpiredError' }));
+router.use("/main", passport.authenticate('jwt', { 
+    session: false, 
+    failureRedirect: '/?error=TokenExpiredError' 
+}));
 
 router.get("/main", (req, res) => {
 
