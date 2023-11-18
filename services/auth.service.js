@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 const passport = require("passport");
 
 const UserRepository = require("../repository/users.repository");
-
+const secret = process.env.SECRET_KEY
 dotenv.config();
 
 class AuthService {
@@ -26,7 +26,7 @@ class AuthService {
           // 클라이언트에게 JWT생성 후 반환
           const token = jwt.sign(
               { user: user.name },
-              'jwt-secret-key'
+              secret
           );
           res
           .cookie("user", token, {
