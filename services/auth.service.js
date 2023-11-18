@@ -7,31 +7,33 @@ const UserRepository = require("../repository/users.repository");
 const secret = process.env.SECRET_KEY
 dotenv.config();
 
+setUserToken = (res, email) => {
+  const token = jwt.sign({
+    type: "JWT",
+    email: email,
+  }, secret, {
+    expiresIn: "15s",
+    issuer: "admin",
+  });
+  res.cookie('user', token, {
+    httpOnly: true,
+  })
+}
+
 class AuthService {
   userRepository = new UserRepository();
   login = async (req, res, next) => {
     try {
-          // 아까 local로 등록한 인증과정 실행
       passport.authenticate('local', (passportError, user, info) => {
-              // 인증이 실패했거나 유저 데이터가 없다면 에러 발생
-        console.log(user)
         if (passportError || !user) {
           return res.redirect("/?error=check");
         }
-              // user데이터를 통해 로그인 진행
         req.login(user, { session: false }, (loginError) => {
           if (loginError) {
             return res.redirect("/?error=check");
           }
-          // 클라이언트에게 JWT생성 후 반환
-          const token = jwt.sign(
-              { user: user.name },
-              secret
-          );
+          setUserToken(res, user.email)
           res
-          .cookie("user", token, {
-            httpOnly: true,
-          })
           .redirect("/main");
         });
       })(req, res);

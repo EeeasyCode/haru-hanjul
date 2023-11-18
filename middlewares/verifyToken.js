@@ -3,17 +3,17 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 
-verifyToken = async (req, res, next) => {
+verifyToken = async (req, res, token) => {
     const key = process.env.SECRET_KEY;
     
     try {    
-        const clientToken = req.cookies.user;
+        console.log("hgere")
         console.log(req.cookies)
-        const decoded = jwt.verify(clientToken, key);
+        const decoded = jwt.verify(token, key);
         console.log("de: " + decoded)
         if (decoded) {
             res.locals.userId = decoded.username;
-            next();
+            
         }
      } catch (error) {
         if (error.name === "TokenExpiredError") {

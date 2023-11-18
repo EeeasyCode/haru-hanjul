@@ -12,16 +12,6 @@ class AuthController {
       console.log(err);
     }
   }
-
-  signin = async (req, res, next) => {
-    const loginData = await this.authService.login(req, res, next);
-    if (loginData === "USER NOT FOUND" || loginData === "LOGIN ERROR") {
-      return res.redirect("/?error=check");
-    }
-    console.log("loginData: "+loginData);
-    res.cookie('user', loginData);
-    return res.redirect("/main");
-  }
 }
 
 
