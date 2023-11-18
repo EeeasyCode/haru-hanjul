@@ -3,9 +3,7 @@ const { Strategy: LocalStrategy } = require('passport-local');
 const bcrypt = require('bcrypt');
 
 const User = require('../models/users'); 
-
 const passportConfig = { usernameField: 'email', passwordField: 'password' };
-
 const passportVerify = async (email, password, done) => {
   try {
     const user = await User.findOne({ where: { email } });
@@ -13,10 +11,10 @@ const passportVerify = async (email, password, done) => {
       done(null, false, { message: '존재하지 않는 사용자 입니다.' });
       return;
     }
-
     const compareResult = await bcrypt.compare(password, user.password);
 
     if (compareResult) {
+
       done(null, user);
       return;
     }

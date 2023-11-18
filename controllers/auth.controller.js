@@ -1,13 +1,21 @@
 const AuthService = require('../services/auth.service');
+const passport = require("passport");
 
 class AuthController {
   authService = new AuthService(); 
-
-  authLogin = async (req, res, next) => {
-    const { email, password } = req.body;
-
-    const authLoginData = await this.authService.authLogin(email, password);
-
+  signin = async (req, res, next) => {
+    const loginData = await this.authService.login(req, res, next);
+    if (!loginData) {
+      return res.redirect("/?error=check");
+    }
+    res.cookie('user', loginData);
+    return res.redirect("/main");
+  }
+  authLogin = async (req, res) => {
+    // const { email, password } = req.body;
+    
+    const authLoginData = await this.authService.authLogin(req, res);
+    console.log(authLoginData)
     if (!authLoginData) {
       return res.redirect("/?error=check");
     }

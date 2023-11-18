@@ -15,7 +15,7 @@ const app = express();
 
 
 dotenv.config();
-passportConfig();
+
 
 app.set("port", process.env.PORT || 3000);
 app.set("view engine", "html");
@@ -37,6 +37,7 @@ app.use(express.static(`${__dirname}/public`));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+passportConfig();
 app.use(passport.initialize());
 
 app.use('/', indexRoute);

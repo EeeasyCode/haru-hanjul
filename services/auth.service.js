@@ -9,10 +9,41 @@ dotenv.config();
 
 class AuthService {
   userRepository = new UserRepository();
-
-  authLogin = async (email, password) => {
+  login = async (req, res, next) => {
+      try {
+        passport.authenticate('local', {session: false}, (err, user) => {
+          if (err || !user) {
+              return res.status(400).json({
+                  message: 'Something is not right',
+                  user: user
+              });
+          }
+          req.login(user, {session: false}, (err) => {
+              if (err) {
+                  res.send(err);
+              }
+              const key = process.env.SECRET_KEY;
+              const token = jwt.sign(
+                {
+                  type: "JWT",
+                  email: user.email,
+                },
+                key,
+                {
+                  expiresIn: "10m", 
+                  issuer: "admin",
+                }
+              );
+              return token;
+          });
+      })(req, res);
+      } catch (err) {
+        console.log(err)
+      }
+  }
+  authLogin = async (req, res, next) => {
     try {
-      passport.authenticate('local', user, (req, res, next) => {
+      passport.authenticate('local', (passportError, user, info) => {
         if(passportError || !user) {
           res.status(400).json({
             message: info.reason
