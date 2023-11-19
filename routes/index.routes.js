@@ -10,10 +10,13 @@ router.get("/", (req, res) => {
 });
 
 router.use('/main', verifyToken);
-router.get("/main", async (req, res) => {
-    await usersController.getUser(req, res);
+router.get("/main", (req, res) => {
+    usersController.getUser(req, res);
     res.render("main");
 });
 
+router.get("/myPage", (req, res) => {
+    res.render("my_page");
+});
  
 module.exports = router;
