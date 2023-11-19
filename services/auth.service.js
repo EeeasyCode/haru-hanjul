@@ -12,7 +12,7 @@ setUserToken = (res, email) => {
     type: "JWT",
     email: email,
   }, secret, {
-    expiresIn: "15s",
+    expiresIn: "10m",
     issuer: "admin",
   });
   res.cookie('user', token, {
