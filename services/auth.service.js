@@ -22,22 +22,23 @@ class AuthService {
         return false
     }
 
-    const authToken = this.createToken(email);
+    const authToken = this.createToken(email, checkUser.username);
 
     return authToken
   }
 
-  createToken = async (email) => {
+  createToken = async (email, username) => {
     const key = process.env.SECRET_KEY;
 
     const token = jwt.sign(
       {
         type: "JWT",
         email: email,
+        username: username
       },
       key,
       {
-        expiresIn: "1m", 
+        expiresIn: "15m", 
         issuer: "admin",
       }
     );

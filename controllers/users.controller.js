@@ -1,10 +1,14 @@
 const UsersService = require('../services/users.service');
+const jwt = require('jsonwebtoken');
 
 class UsersController {
   usersService = new UsersService(); 
-
-
-  createUser = async (req, res, next) => {
+  
+  getUser = (req, res) => {
+    const user = jwt.verify(req.cookies.user, process.env.SECRET_KEY);
+    res.locals.user = user
+  }
+  createUser = async (req, res) => {
     const { username, email, password } = req.body;
     const createCheck = await this.usersService.createUser(username, email, password);
     if (createCheck) {
