@@ -1,4 +1,4 @@
-const { Posts } = require('../models');
+const { Posts, Users } = require('../models');
 
 class PostRepository {
   createPost = async (date, title, content) => {
@@ -7,6 +7,16 @@ class PostRepository {
 
     return createPostData;
   }
+
+  getPostLists = async (user) => {
+    const user_data = await Users.findOne({
+      where: {
+        username: user.username,
+      }
+    })
+    const postLists = await user_data.getPosts()
+    return postLists
+    }
 }
 
 module.exports = PostRepository;
