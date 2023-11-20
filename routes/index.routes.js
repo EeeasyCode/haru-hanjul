@@ -20,8 +20,10 @@ router.get("/main", (req, res) => {
 });
 
 router.get("/myPage", (req, res) => {
-    indexController.getPostLists(req, res);
-    res.render("my_page");
+    const postLists = indexController.getPostLists(req, res);
+    res.render("my_page", {
+        postLists
+    });
 });
  
 module.exports = router;
