@@ -6,7 +6,6 @@ require('dotenv').config();
 class PostsController {
   postsService = new PostsService(); 
 
-
   createPost = async (req, res, next) => {
     const { date, title, content } = req.body;
     const user = jwt.verify(req.cookies.user, process.env.SECRET_KEY);
