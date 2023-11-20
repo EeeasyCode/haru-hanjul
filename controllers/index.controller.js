@@ -1,4 +1,3 @@
-const jwt = require('jsonwebtoken');
 const PostsService = require('../services/posts.service');
 
 class IndexController {

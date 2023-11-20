@@ -4,9 +4,9 @@ class PostService {
     
   postRepository = new PostRepository();
 
-  createPost = async (date, title, content) => {
+  createPost = async (user, title, content, date) => {
 
-    await this.postRepository.createPost(title, content, date);
+    await this.postRepository.createPost(user, title, content, date);
     
     return true;
   }
