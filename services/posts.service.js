@@ -10,6 +10,12 @@ class PostService {
     
     return true
   }
+
+  getPostLists = async (user) => {
+
+
+
+  }
 }
 
 module.exports = PostService;
