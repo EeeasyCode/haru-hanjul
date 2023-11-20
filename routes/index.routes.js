@@ -19,10 +19,10 @@ router.get("/main", (req, res) => {
     res.render("main");
 });
 
-router.get("/myPage", (req, res) => {
-    const postLists = indexController.getPostLists(req, res);
-    res.render("my_page", {
-        postLists
+router.get("/myPage", async (req, res) => {
+    const postLists = await indexController.getPostLists(req, res);
+    res.render("my_page.html", {
+        postLists: postLists
     });
 });
  

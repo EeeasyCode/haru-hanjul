@@ -7,7 +7,6 @@ class IndexController {
   getPostLists = async (req, res) => {
     const user = jwt.verify(req.cookies.user, process.env.SECRET_KEY);
     const postLists = await this.postsService.getPostLists(user);
-    
     return postLists;
     }
 }
