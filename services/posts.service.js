@@ -8,12 +8,14 @@ class PostService {
 
     await this.postRepository.createPost(title, content, date);
     
-    return true
+    return true;
   }
 
   getPostLists = async (user) => {
 
+    const postLists = await this.postRepository.getPostLists(user);
 
+    return postLists;
 
   }
 }
