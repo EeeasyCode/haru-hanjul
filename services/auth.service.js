@@ -41,6 +41,34 @@ class AuthService {
       console.error(error);
       next(error);
     }
+
+    const hashPassword = await bcrypt.compare(password, checkUser.password);
+
+    if (hashPassword === false) {
+        return false
+    }
+
+    const authToken = this.createToken(email, checkUser.username);
+
+    return authToken
+  }
+
+  createToken = async (email, username) => {
+    const key = process.env.SECRET_KEY;
+
+    const token = jwt.sign(
+      {
+        type: "JWT",
+        email: email,
+        username: username
+      },
+      key,
+      {
+        expiresIn: "15m", 
+        issuer: "admin",
+      }
+    );
+    return token
   };
 }
 
