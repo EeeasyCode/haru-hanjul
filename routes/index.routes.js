@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const dotenv = require('dotenv');
+const passport = require('passport');
+
 const UsersController = require('../controllers/users.controller');
 const IndexController = require('../controllers/index.controller');
 
