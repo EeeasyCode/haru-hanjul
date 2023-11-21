@@ -1,18 +1,16 @@
 const AuthService = require('../services/auth.service');
+const passport = require("passport");
 
+const jwt = require("jsonwebtoken");
 class AuthController {
   authService = new AuthService(); 
 
-  authLogin = async (req, res, next) => {
-    const { email, password } = req.body;
-
-    const authLoginData = await this.authService.authLogin(email, password);
-
-    if (!authLoginData) {
-      return res.redirect("/?error=check");
+  login = async (req, res, next) => {
+    try {
+      await this.authService.login(req, res, next)
+    } catch(err) {
+      console.log(err);
     }
-    res.cookie('user', authLoginData);
-    return res.redirect("/main");
   }
 }
 
