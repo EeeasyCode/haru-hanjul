@@ -10,15 +10,17 @@
 <body>
   <section class="wrapper">
     <div class="main">
-      {% for post in postLists %} 
-        <li>{{post.title}}</li>
-      {% endfor %} 
       <header>지난 날의 하루들</header>
       <p>오늘의 하루는 어땠나요?</p>
       <p>하루동안의 감정을 한줄로 기록해봐요.</p>
-      <p>{{ postLists[0].title }}</p>
-      <p>{{ postLists[0].content }}</p>
-      <p>{{ postLists[0].date }}</p>
+      {% for post in postLists %}
+      <div>
+        <br>
+        <p>Date : {{ post.date }}</p> 
+        <p>Title : {{ post.title }}</p>
+        <p>Content : {{ post.content }}</p>
+      </div>
+      {% endfor %} 
       <script>console.log(post)</script>
     </div>
   </section>
