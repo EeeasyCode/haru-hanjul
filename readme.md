@@ -7,6 +7,6 @@
 Database : mysql
 
 [Back-End]
-Language : Javasript
+Language : Javascript
 Framework : express
 ```
