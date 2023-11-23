@@ -19,10 +19,10 @@ class UsersController {
   }
   followUser = async (req, res, next) => {
     try {
-      const id = req.user.id;
+      const id = req.params.id;
       const user = await this.usersService.followUser(id);
       if (user) {
-        await this.usersService.addFollowing(parseInt(id, 10));
+        await this.usersService.addFollowing(user, parseInt(id, 10));
         res.send('success');
       } else {
         res.status(404).send('no user');

@@ -7,8 +7,13 @@ class UserRepository {
   }
 
   findFollowUser = async (id) => {
-    const followUserData = await Users.findOne({ where: id });
-    return followUserData;
+    try {
+      const followUserData = await Users.findOne({ where: { id:id} });
+      return followUserData;
+
+    } catch (err) {
+      console.log("ERROR: ",err);
+    }
   }
   createUser = async (username, email, password) => {
     
@@ -17,8 +22,8 @@ class UserRepository {
     return createUserData;
   }
 
-  addFollowing = async (id) => {
-    await Users.addFollowing(id);
+  addFollowing = async (user, id) => {
+    await user.addFollowing(id);
   }
 }
 
