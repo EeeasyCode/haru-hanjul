@@ -17,6 +17,21 @@ class UsersController {
     }
     return res.redirect('/');
   }
+  followUser = async (req, res, next) => {
+    try {
+      const id = req.user.id;
+      const user = await this.usersService.followUser(id);
+      if (user) {
+        await this.usersService.addFollowing(parseInt(id, 10));
+        res.send('success');
+      } else {
+        res.status(404).send('no user');
+      }
+    } catch (error) {
+      console.error(error);
+      next(error);
+    }
+  }
 }
 
 module.exports = UsersController;

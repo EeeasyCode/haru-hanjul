@@ -13,10 +13,22 @@ class UserService {
       const hashPassword = await bcrypt.hash(password, 10);
       await this.userRepository.createUser(username, email, hashPassword);
       
-      return false
+      return false;
     } catch(err) {
-      console.log(err)
+      console.log(err);
     }
+  }
+
+  followUser = async (id) => {
+    try {
+      const user = await this.userRepository.findFollowUser(id);
+      return user;
+    } catch(err) {
+      console.log(err);
+    }
+  }
+  addFollowing = async (id) => {
+    await this.userRepository.addFollowing(id);
   }
 }
 
