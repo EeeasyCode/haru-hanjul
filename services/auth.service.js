@@ -7,10 +7,11 @@ const UserRepository = require("../repository/users.repository");
 const secret = process.env.SECRET_KEY
 dotenv.config();
 
-setUserToken = (res, email) => {
+setUserToken = (res, user) => {
   const token = jwt.sign({
     type: "JWT",
-    email: email,
+    email: user.email,
+    username: user.username,
   }, secret, {
     expiresIn: "10m",
     issuer: "admin",
@@ -32,7 +33,7 @@ class AuthService {
           if (loginError) {
             return res.redirect("/?error=check");
           }
-          setUserToken(res, user.email)
+          setUserToken(res, user)
           res
           .redirect("/main");
         });

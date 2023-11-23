@@ -6,7 +6,8 @@ class UsersController {
   
   getUser = (req, res) => {
     const user = jwt.verify(req.cookies.user, process.env.SECRET_KEY);
-    res.locals.user = user
+    res.locals.user = user;
+    console.log(JSON.stringify(user))
   }
   createUser = async (req, res) => {
     const { username, email, password } = req.body;
