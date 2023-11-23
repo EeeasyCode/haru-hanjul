@@ -27,8 +27,8 @@ class UserService {
       console.log(err);
     }
   }
-  addFollowing = async (id) => {
-    await this.userRepository.addFollowing(id);
+  addFollowing = async (user, id) => {
+    await this.userRepository.addFollowing(user, id);
   }
 }
 
