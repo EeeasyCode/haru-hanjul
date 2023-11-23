@@ -6,11 +6,19 @@ class UserRepository {
     return findUserData;
   }
 
+  findFollowUser = async (id) => {
+    const followUserData = await Users.findOne({ where: id });
+    return followUserData;
+  }
   createUser = async (username, email, password) => {
     
     const createUserData = await Users.create({ username, email, password });
 
     return createUserData;
+  }
+
+  addFollowing = async (id) => {
+    await Users.addFollowing(id);
   }
 }
 
