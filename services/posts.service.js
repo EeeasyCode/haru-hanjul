@@ -18,6 +18,12 @@ class PostService {
     return postLists;
 
   }
+
+  getAllPostLists = async () => {
+    const postAllLists = await this.postRepository.getAllPostLists();
+
+    return postAllLists;
+  }
 }
 
 module.exports = PostService;
