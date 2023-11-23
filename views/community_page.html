@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>index</title>
+  <link rel="stylesheet" href="/css/my_page.css">
+</head>
+<body>
+  <section class="wrapper">
+    <div class="main">
+      <header>My Diary</header>
+      <p></p>
+      {% for post in postLists %}
+      <br>
+        <p class="hi">{{ post.title }}</p>  
+        <p class="hi2">{{ post.date }}</p>
+      <div class="content-box">
+        <div class="content">
+          <p>Content : {{ post.content }}</p>
+        </div>
+      </div>
+      {% endfor %} 
+      <script>console.log(post)</script>
+    </div>
+  </section>
+</body>
+</html>
