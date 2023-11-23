@@ -32,7 +32,7 @@ router.get("/myPage", async (req, res) => {
     });
 });
  
-router.get("/communityPage", async (req, res) => {
+router.get("/community", async (req, res) => {
     const postLists = await indexController.getAllPostLists(req, res);
     res.render("community_page.html", {
         postLists: postLists
