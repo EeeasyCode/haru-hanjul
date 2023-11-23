@@ -29,6 +29,11 @@ class PostRepository {
     const postLists = await user_data.getPosts()
     return postLists
     }
+
+    getAllPostLists = async () => {
+      const postAllLists = await Posts.findAll({});
+      return postAllLists;
+    }
 }
 
 module.exports = PostRepository;
