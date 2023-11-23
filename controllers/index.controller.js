@@ -9,6 +9,11 @@ class IndexController {
     const postLists = await this.postsService.getPostLists(user);
     return postLists;
     }
+
+  getAllPostLists = async (req, res) => {
+    const allPostLists = await this.postsService.getAllPostLists();
+    return allPostLists
+  }
 }
 
 module.exports = IndexController;
