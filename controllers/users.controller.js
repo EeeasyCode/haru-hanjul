@@ -1,5 +1,6 @@
 const UsersService = require('../services/users.service');
 const jwt = require('jsonwebtoken');
+const Users = require('../models/users');
 
 class UsersController {
   usersService = new UsersService(); 
@@ -8,14 +9,25 @@ class UsersController {
     const user = jwt.verify(req.cookies.user, process.env.SECRET_KEY);
     res.locals.user = user;
   }
-  getFollower = (req, res) => {
+  getFollower = async (req, res) => {
     try {
       const user = jwt.verify(req.cookies.user, process.env.SECRET_KEY);
-      console.log(user)
+      const follow_user_data = await Users.findOne({
+        where: { email: user.email },
+          include: [{
+            model: Users,
+            attributes: ['id', 'username'],
+            as: 'Followers',
+          }, {
+            model: Users,
+            attributes: ['id', 'username'],
+            as: 'Followings',
+          }],
+      });
       res.locals.user = user;
-      res.locals.followerCount = req.user ? req.user.Followers.length : 0;
-      res.locals.followingCount = req.user ? req.user.Followings.length : 0;
-      res.locals.followerIdList = req.user ? req.user.Followings.map(f => f.id) : [];
+      res.locals.followerCount = follow_user_data ? follow_user_data.Followers.length : 0;
+      res.locals.followingCount = follow_user_data ? follow_user_data.Followings.length : 0;
+      res.locals.followerIdList = follow_user_data ? follow_user_data.Followings.map(f => f.id) : [];
     } catch(err) {
       console.log(err)
     }
