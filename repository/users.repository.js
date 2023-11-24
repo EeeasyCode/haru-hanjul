@@ -6,14 +6,20 @@ class UserRepository {
     return findUserData;
   }
 
-  findFollowUser = async (follower) => {
-    try {
-      const followUserData = await Users.findOne({ where: { username:follower} });
-      return followUserData;
-
-    } catch (err) {
-      console.log("ERROR: ",err);
-    }
+  getFollowUser = async (user) => {
+    const find_follow_data = Users.findOne({
+      where: { email: user.email },
+        include: [{
+          model: Users,
+          attributes: ['id', 'username'],
+          as: 'Followers',
+        }, {
+          model: Users,
+          attributes: ['id', 'username'],
+          as: 'Followings',
+        }],
+    });
+    return find_follow_data;
   }
   createUser = async (username, email, password) => {
     

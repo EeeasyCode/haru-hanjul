@@ -12,18 +12,7 @@ class UsersController {
   getFollower = async (req, res) => {
     try {
       const user = jwt.verify(req.cookies.user, process.env.SECRET_KEY);
-      const follow_user_data = await Users.findOne({
-        where: { email: user.email },
-          include: [{
-            model: Users,
-            attributes: ['id', 'username'],
-            as: 'Followers',
-          }, {
-            model: Users,
-            attributes: ['id', 'username'],
-            as: 'Followings',
-          }],
-      });
+      const follow_user_data = await this.usersService.getFollowUser(user);
       res.locals.user = user;
       res.locals.followerCount = follow_user_data ? follow_user_data.Followers.length : 0;
       res.locals.followingCount = follow_user_data ? follow_user_data.Followings.length : 0;
