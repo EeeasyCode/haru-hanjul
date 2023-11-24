@@ -42,9 +42,16 @@ router.get("/myPage", async (req, res) => {
 });
  
 router.get("/community", async (req, res) => {
-    const postLists = await indexController.getAllPostLists(req, res);
-    res.render("community_page.html", {
-        postLists: postLists
-    });
+    try{
+        usersController.getUser(req, res);
+        usersController.getFollower(req, res);
+        const postLists = await indexController.getAllPostLists(req, res);
+        console.log(postLists)
+        res.render("community_page.html", {
+            postLists: postLists
+        });
+    } catch (err) {
+        console.log(err);
+    }
 });
 module.exports = router;

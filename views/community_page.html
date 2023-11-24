@@ -16,6 +16,12 @@
       <br>
         <p class="hi">{{ post.title }}</p>  
         <p class="hi2">{{ post.date }}</p>
+        <p>userId ::: {{ userId }} </p>
+        <p>{{ post.publisher }} </p>
+        <p>{{followerIdList.includes(post.publisher)}}</p>
+        {% if not followerIdList.includes(post.publisher) and post.publisher !== userId %}
+          <button class="twit-follow">팔로우하기</button>
+        {% endif %}
       <div class="content-box">
         <div class="content">
           <p>Content : {{ post.content }}</p>
