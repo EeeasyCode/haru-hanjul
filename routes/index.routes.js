@@ -26,11 +26,12 @@ router.get("/main", (req, res) => {
 });
 
 router.use("/myPage", (req, res, next) => {
-    res.locals.user = req.user;
-    res.locals.followerCount = req.user ? req.user.Followers.length : 0;
-    res.locals.followingCount = req.user ? req.user.Followings.length : 0;
-    res.locals.followerIdList = req.user ? req.user.Followings.map(f => f.id) : [];
-    next();
+    try {
+        usersController.getFollower(req, res);
+        next();
+    } catch (err) {
+        console.log(err)
+    }
   });
 
 router.get("/myPage", async (req, res) => {
