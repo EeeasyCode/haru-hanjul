@@ -24,6 +24,7 @@ class UsersController {
     try {
       const user = jwt.verify(req.cookies.user, process.env.SECRET_KEY);
       const follow_user_data = await this.usersService.getFollowUser(user);
+       
       res.locals.user = user;
       res.locals.followerCount = follow_user_data ? follow_user_data.Followers.length : 0;
       res.locals.followingCount = follow_user_data ? follow_user_data.Followings.length : 0;

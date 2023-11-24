@@ -31,7 +31,13 @@ class PostRepository {
     }
 
     getAllPostLists = async () => {
-      const postAllLists = await Posts.findAll({});
+      const postAllLists = await Posts.findAll({
+        include: {
+          model: Users,
+          attributes: ['id', 'username'],
+        },
+        order: [['created_at', 'DESC']],
+      });
       return postAllLists;
     }
 }
