@@ -1,7 +1,5 @@
 const AuthService = require('../services/auth.service');
-const passport = require("passport");
 
-const jwt = require("jsonwebtoken");
 class AuthController {
   authService = new AuthService(); 
 

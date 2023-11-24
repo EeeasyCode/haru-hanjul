@@ -5,12 +5,11 @@ require('dotenv').config();
 
 verifyToken = async (req, res, token) => {
     const key = process.env.SECRET_KEY;
-    
     try {    
         const decoded = jwt.verify(token, key);
         if (decoded) {
             res.locals.userId = decoded.username;
-            
+            res.locals.email = decoded.email;
         }
      } catch (error) {
         if (error.name === "TokenExpiredError") {
