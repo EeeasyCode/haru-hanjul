@@ -17,12 +17,14 @@
       <div>
         <input type="hidden" value="{{post.publisher}}" class="post-test">
         <input id="my-id" type="hidden" value="{{userId}}">
-        <p class="post-user-name">{{post.User.username}}님의 한줄</p>
+        <p class="post-user-name">{{post.User.username}}님의 한줄
+          {% if not followerIdList.includes(post.publisher) and post.publisher !== userId %}
+            <button class="user-follow">Follow</button>
+          {% endif %}
+        </p>
+        
         <p class="hi">{{ post.title }}</p>  
         <p class="hi2">{{ post.date }}</p>
-          {% if not followerIdList.includes(post.publisher) and post.publisher !== userId %}
-            <button class="twit-follow">팔로우하기</button>
-          {% endif %}
         </div>    
       <div class="content-box">
         <div class="content">
@@ -32,11 +34,11 @@
       {% endfor %} 
       <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
       <script>
-        document.querySelectorAll('.twit-follow').forEach(function(tag) {
+        document.querySelectorAll('.user-follow').forEach(function(tag) {
       tag.addEventListener('click', function() {
         const myId = document.querySelector('#my-id');
         if (myId) {
-          const userId = tag.parentNode.querySelector('.post-test').value;
+          const userId = document.querySelector('.post-test').value;
           if (userId !== myId.value) {
             if (confirm('팔로잉하시겠습니까?')) {
               axios.post(`/users/${userId}/follow`)
