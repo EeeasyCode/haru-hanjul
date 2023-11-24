@@ -19,9 +19,9 @@ class UserService {
     }
   }
 
-  followUser = async (id) => {
+  followUser = async (follower) => {
     try {
-      const user = await this.userRepository.findFollowUser(id);
+      const user = await this.userRepository.findFollowUser(follower);
       return user;
     } catch(err) {
       console.log(err);
