@@ -12,6 +12,12 @@
     <div class="main">
       <header>My Diary</header>
       <p></p>
+      <div class="follow-count">
+        <div>팔로잉</div>
+        <div class="count following-count">{{followingCount}}</div>
+        <div>팔로워</div>
+        <div class="count follower-count">{{followerCount}}</div>
+      </div>
       {% for post in postLists %}
       <br>
         <p class="hi">{{ post.title }}</p>  
