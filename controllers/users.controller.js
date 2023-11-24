@@ -7,7 +7,6 @@ class UsersController {
   getUser = (req, res) => {
     const user = jwt.verify(req.cookies.user, process.env.SECRET_KEY);
     res.locals.user = user;
-    console.log(JSON.stringify(user))
   }
   createUser = async (req, res) => {
     const { username, email, password } = req.body;
@@ -20,7 +19,9 @@ class UsersController {
   followUser = async (req, res, next) => {
     try {
       const id = req.params.id;
-      const user = await this.usersService.followUser(id);
+      const follower = jwt.verify(req.cookies.user, process.env.SECRET_KEY).username;
+      console.log(follower)
+      const user = await this.usersService.followUser(follower);
       if (user) {
         await this.usersService.addFollowing(user, parseInt(id, 10));
         res.send('success');

@@ -6,9 +6,9 @@ class UserRepository {
     return findUserData;
   }
 
-  findFollowUser = async (id) => {
+  findFollowUser = async (follower) => {
     try {
-      const followUserData = await Users.findOne({ where: { id:id} });
+      const followUserData = await Users.findOne({ where: { username:follower} });
       return followUserData;
 
     } catch (err) {
