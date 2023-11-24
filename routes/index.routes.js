@@ -25,6 +25,14 @@ router.get("/main", (req, res) => {
     res.render("main");
 });
 
+router.use("/myPage", (req, res, next) => {
+    res.locals.user = req.user;
+    res.locals.followerCount = req.user ? req.user.Followers.length : 0;
+    res.locals.followingCount = req.user ? req.user.Followings.length : 0;
+    res.locals.followerIdList = req.user ? req.user.Followings.map(f => f.id) : [];
+    next();
+  });
+
 router.get("/myPage", async (req, res) => {
     const postLists = await indexController.getPostLists(req, res);
     res.render("my_page.html", {
