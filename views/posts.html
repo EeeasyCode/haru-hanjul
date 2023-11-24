@@ -25,7 +25,6 @@
     </div>
     <script>
       window.onload = () => {
-        console.log(new URL(location.href).searchParams.get('error'))
         if (new URL(location.href).searchParams.get('status')==='again') {
           alert('다시 작성해주세요.');
         }

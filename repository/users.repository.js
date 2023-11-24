@@ -28,8 +28,16 @@ class UserRepository {
     return createUserData;
   }
 
+  followUser = async (follower) => {
+    return await Users.findOne({ where: { username: follower } });
+  }
   addFollowing = async (user, id) => {
-    await user.addFollowing(id);
+    try {
+
+      await user.addFollowing(id);
+    } catch (err) {
+      console.log(err)
+    }
   }
 }
 
