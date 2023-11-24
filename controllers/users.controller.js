@@ -5,9 +5,20 @@ const Users = require('../models/users');
 class UsersController {
   usersService = new UsersService(); 
   
-  getUser = (req, res) => {
-    const user = jwt.verify(req.cookies.user, process.env.SECRET_KEY);
-    res.locals.user = user;
+  getUser = async (req, res) => {
+    try {
+      const user = jwt.verify(req.cookies.user, process.env.SECRET_KEY);
+      const userId = await Users.findOne({
+        attributes: ['id'],
+        where: {
+          email: user.email
+        }
+      })
+      res.locals.user = user;
+      res.locals.userId = userId.id;
+    } catch (err) {
+      console.log(err);
+    }
   }
   getFollower = async (req, res) => {
     try {
