@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>index</title>
-  <link rel="stylesheet" href="/css/my_page.css">
+  <link rel="stylesheet" href="/css/cmmunity_page.css">
 </head>
 <body>
   <section class="wrapper">
@@ -17,9 +17,9 @@
       <div>
         <input type="hidden" value="{{post.publisher}}" class="post-test">
         <input id="my-id" type="hidden" value="{{userId}}">
+        <p class="post-user-name">{{post.User.username}}님의 한줄</p>
         <p class="hi">{{ post.title }}</p>  
         <p class="hi2">{{ post.date }}</p>
-        <p>{{ post.publisher }}</p>
           {% if not followerIdList.includes(post.publisher) and post.publisher !== userId %}
             <button class="twit-follow">팔로우하기</button>
           {% endif %}
