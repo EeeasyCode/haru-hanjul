@@ -11,23 +11,28 @@
   <section class="wrapper">
     <div class="main">
       <header>My Diary</header>
-      <p></p>
-      <div class="follow-count">
-        <div>팔로잉</div>
-        <div class="count following-count">{{followingCount}}</div>
-        <div>팔로워</div>
-        <div class="count follower-count">{{followerCount}}</div>
-      </div>
-      {% for post in postLists %}
-      <br>
-        <p class="hi">{{ post.title }}</p>  
-        <p class="hi2">{{ post.date }}</p>
-      <div class="content-box">
-        <div class="content">
-          <p>Content : {{ post.content }}</p>
+      <div class="my-info">
+        <p>[My Info]</p>
+        <div class="following-count">
+          <p>팔로잉 수 : {{followingCount}}</p>
+        </div>
+        <div class="follower-count">
+          <p>팔로워 수 : {{followerCount}}</p>
         </div>
       </div>
-      {% endfor %} 
+      <div class="diary">
+          <p></p>
+        {% for post in postLists %}
+        <br>
+          <p class="hi">{{ post.title }}</p>  
+          <p class="hi2">{{ post.date }}</p>
+        <div class="content-box">
+          <div class="content">
+            <p>Content : {{ post.content }}</p>
+          </div>
+        </div>  
+        {% endfor %} 
+      </div>
       <script>console.log(post)</script>
     </div>
   </section>
