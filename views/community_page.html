@@ -14,21 +14,44 @@
       <p></p>
       {% for post in postLists %}
       <br>
+      <div>
+        <input type="hidden" value="{{post.publisher}}" class="post-test">
+        <input id="my-id" type="hidden" value="{{userId}}">
         <p class="hi">{{ post.title }}</p>  
         <p class="hi2">{{ post.date }}</p>
-        <p>userId ::: {{ userId }} </p>
-        <p>{{ post.publisher }} </p>
-        <p>{{followerIdList.includes(post.publisher)}}</p>
-        {% if not followerIdList.includes(post.publisher) and post.publisher !== userId %}
-          <button class="twit-follow">팔로우하기</button>
-        {% endif %}
+        <p>{{ post.publisher }}</p>
+          {% if not followerIdList.includes(post.publisher) and post.publisher !== userId %}
+            <button class="twit-follow">팔로우하기</button>
+          {% endif %}
+        </div>    
       <div class="content-box">
         <div class="content">
           <p>Content : {{ post.content }}</p>
         </div>
       </div>
       {% endfor %} 
-      <script>console.log(post)</script>
+      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+      <script>
+        document.querySelectorAll('.twit-follow').forEach(function(tag) {
+      tag.addEventListener('click', function() {
+        const myId = document.querySelector('#my-id');
+        if (myId) {
+          const userId = tag.parentNode.querySelector('.post-test').value;
+          if (userId !== myId.value) {
+            if (confirm('팔로잉하시겠습니까?')) {
+              axios.post(`/users/${userId}/follow`)
+                .then(() => {
+                  location.reload();
+                })
+                .catch((err) => {
+                  console.error(err);
+                });
+            }
+          }
+        }
+      });
+    });
+      </script>
     </div>
   </section>
 </body>

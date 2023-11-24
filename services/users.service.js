@@ -23,8 +23,16 @@ class UserService {
     return await this.userRepository.getFollowUser(user);
   }
 
+  followUser = async (follower) => {
+    return await this.userRepository.followUser(follower);
+  }
   addFollowing = async (user, id) => {
-    await this.userRepository.addFollowing(user, id);
+    try {
+
+      await this.userRepository.addFollowing(user, id);
+    } catch (err) {
+      console.log(err);
+    }
   }
 }
 

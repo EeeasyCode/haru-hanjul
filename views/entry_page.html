@@ -47,7 +47,6 @@
         })
           
       window.onload = () => {
-        console.log(new URL(location.href).searchParams.get('error'))
         if (new URL(location.href).searchParams.get('error')==='exist') {
           alert('이미 존재하는 이메일입니다.');
         }

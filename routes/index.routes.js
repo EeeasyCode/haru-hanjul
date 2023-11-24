@@ -20,14 +20,14 @@ router.use("/main", passport.authenticate('jwt', {
     failureRedirect: '/?error=TokenExpiredError' 
 }));
 
-router.get("/main", (req, res) => {
-    usersController.getUser(req, res);
+router.get("/main", async (req, res) => {
+    await usersController.getUser(req, res);
     res.render("main");
 });
 
-router.use("/myPage", (req, res, next) => {
+router.use("/myPage", async (req, res, next) => {
     try {
-        usersController.getFollower(req, res);
+        await usersController.getFollower(req, res);
         next();
     } catch (err) {
         console.log(err)
@@ -43,10 +43,9 @@ router.get("/myPage", async (req, res) => {
  
 router.get("/community", async (req, res) => {
     try{
-        usersController.getUser(req, res);
-        usersController.getFollower(req, res);
+        await usersController.getUser(req, res);
+        await usersController.getFollower(req, res);
         const postLists = await indexController.getAllPostLists(req, res);
-        console.log(postLists)
         res.render("community_page.html", {
             postLists: postLists
         });
