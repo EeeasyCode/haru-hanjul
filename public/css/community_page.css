@@ -39,7 +39,7 @@ body {
 }
 
 .content-box {
-    margin-top: 30px;
+    margin-top: 50px;
     border:2px solid;
     border-radius: 12px;
     border-color: #fff;
@@ -49,6 +49,7 @@ body {
     color: #fff;
     font-size: 20px;
     font-weight: 600;
+    margin-bottom: 15px;
 }
 .hi {
     float: left;
