@@ -12,8 +12,6 @@ class IndexController {
 
   getAllPostLists = async (req, res) => {
     const allPostLists = await this.postsService.getAllPostLists();
-    console.log("hi")
-    console.log(allPostLists[0].User.username)
     return allPostLists
   }
 }
