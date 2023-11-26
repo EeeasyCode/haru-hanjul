@@ -1,7 +1,7 @@
 const { Posts, Users } = require('../models');
 
 class PostRepository {
-  createPost = async (user, title, content, date) => {
+  createPost = async (user, title, content, img, date) => {
     try{
     const user_data = await Users.findOne({
       attributes: ['id'],
@@ -11,7 +11,7 @@ class PostRepository {
     })
     const user_id = user_data.dataValues.id;
 
-    const createPostData = await Posts.create({ title, content, date, publisher:user_id });
+    const createPostData = await Posts.create({ title, content, img, date, publisher:user_id });
 
     return createPostData;
   } catch (err) {
