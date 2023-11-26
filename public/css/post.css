@@ -98,8 +98,10 @@ form input[type="submit"] {
     padding: 10px;
     overflow: hidden;
   }
-  #img-preview { max-width: 100%; }
-  #img-label {
+
+#img-preview { max-width: 100%; }
+
+#img-label {
     float: left;
     cursor: pointer;
     border-radius: 4px;
@@ -109,6 +111,7 @@ form input[type="submit"] {
     font-size: 12px;
     height: 37px;
     line-height: 37px;
-  }
-  #img { display: none; }
+}
+
+#img { display: none; }
   
