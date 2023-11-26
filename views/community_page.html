@@ -14,23 +14,23 @@
       <p></p>
       {% for post in postLists %}
       <br>
-      <div>
-        <input type="hidden" value="{{post.publisher}}" class="post-test">
-        <input id="my-id" type="hidden" value="{{userId}}">
-        <p class="post-user-name">{{post.User.username}}님의 한줄
+      <div class="follow">
+        <div class="post-user-name">{{post.User.username}}님의 한줄
+          <input type="hidden" value="{{post.publisher}}" class="post-publisher">
+          <input id="my-id" type="hidden" value="{{userId}}">
           {% if not followerIdList.includes(post.publisher) and post.publisher !== userId %}
             <button class="user-follow">Follow</button>
           {% endif %}
-        </p>
-        
+        </div>
         <p class="hi">{{ post.title }}</p>  
         <p class="hi2">{{ post.date }}</p>
-        </div>    
+         
       <div class="content-box">
         <div class="content">
           <p>Content : {{ post.content }}</p>
         </div>
       </div>
+    </div>   
       {% endfor %} 
       <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
       <script>
@@ -38,7 +38,9 @@
       tag.addEventListener('click', function() {
         const myId = document.querySelector('#my-id');
         if (myId) {
-          const userId = document.querySelector('.post-test').value;
+          const userId = tag.parentNode.querySelector('.post-publisher').value;
+          console.log(userId)
+          console.log(myId)
           if (userId !== myId.value) {
             if (confirm('팔로잉하시겠습니까?')) {
               axios.post(`/users/${userId}/follow`)
