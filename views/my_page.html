@@ -34,6 +34,9 @@
         <div class="content-box">
           <div class="content">
             <p>Content : {{ post.content }}</p>
+            {% if post.img %}
+              <div class="twit-img"><img src="{{post.img}}" alt="섬네일"></div>
+            {% endif %}
           </div>
         </div>  
         {% endfor %} 
