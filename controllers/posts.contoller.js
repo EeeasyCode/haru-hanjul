@@ -8,8 +8,9 @@ class PostsController {
 
   createPost = async (req, res, next) => {
     const { date, title, content } = req.body;
+    const img = req.body.url;
     const user = jwt.verify(req.cookies.user, process.env.SECRET_KEY);
-    const createPost = await this.postsService.createPost(user, title, content, date);
+    const createPost = await this.postsService.createPost(user, title, content, img, date);
     if (!createPost) {
       return res.redirect('?status=again');
     }

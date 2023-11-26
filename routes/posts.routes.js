@@ -9,6 +9,7 @@ const router = express.Router();
 const PostsController = require('../controllers/posts.contoller');
 
 const postsController = new PostsController();
+const upload2 = multer();
 
 try {
     fs.readdirSync('uploads');
@@ -22,19 +23,19 @@ const upload = multer({
         destination(req, file, cb) {
         cb(null, 'uploads/');
     },
-        filename(req, file, cb) {
+    filename(req, file, cb) {
         const ext = path.extname(file.originalname);
         cb(null, path.basename(file.originalname, ext) + Date.now() + ext);
     },
 }),
-    limits: { fileSize: 5 * 1024 * 1024 },
+limits: { fileSize: 5 * 1024 * 1024 },
 });
 
 
 router.get('/create', (req, res) => {
     res.render('posts');
 })
-router.post('/create', postsController.createPost);
+router.post('/create', upload2.none(), postsController.createPost);
 
 router.post('/img', upload.single('img'), (req, res) => {
     console.log(req.file);
@@ -44,6 +45,8 @@ router.post('/img', upload.single('img'), (req, res) => {
 router.get("/upload", (req, res) => {
     res.render("image.html");
 })
+
+
 
 module.exports = router;
 
