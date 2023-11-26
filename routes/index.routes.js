@@ -53,4 +53,9 @@ router.get("/community", async (req, res) => {
         console.log(err);
     }
 });
+
+router.get("/upload", (req, res) => {
+    console.log("upload")
+    res.render("image.html");
+})
 module.exports = router;
