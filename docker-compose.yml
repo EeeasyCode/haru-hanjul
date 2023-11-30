@@ -19,6 +19,7 @@ services:
     build:
       context: ./server  # 빌드할 Dockerfile이 위치한 경로
     container_name: haru
+    command: bash -c 'while !</dev/tcp/db/3306; do sleep 1; done; npm start'
     expose:
       - "3000"           # 다른 컨테이너에게 3000번 포트 open
     volumes:
@@ -29,12 +30,27 @@ services:
     - haru-app
 
   database:
-    build:
-      context: ./mysql
+    
+    image: mysql:latest
+    # 컨테이너명 설정
     container_name: haru-db
-    restart: "unless-stopped"
+    # 접근 포트 설정 (컨테이너 외부:컨테이너 내부)    
+    ports:
+      - "3306:3306"
+    # 환경 변수 설정
+    environment:
+        MYSQL_ROOT_PASSWORD: 
+        MYSQL_DATABASE: haru-hanhul-dev
+        TZ: Asia/Seoul
+    # 명렬어 설정
+    command:
+        - --character-set-server=utf8mb4
+        - --collation-server=utf8mb4_unicode_ci
+    # 볼륨 설정
     volumes:
-      - ./mysql:/var/lib/mysql
+        - ./db/mysql/:/var/lib/mysql
+    restart: "unless-stopped"
+    
     networks:
       - haru-app
 
