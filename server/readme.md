@@ -15,3 +15,9 @@ node-version : v16.20.2
 [Front-End]
 Language : HTML/CSS/JS
 ```
+
+## 컨테이너 네트워크
+
+```
+NGINX <-> express <-> DB
+```
